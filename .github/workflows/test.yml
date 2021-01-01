@@ -47,11 +47,7 @@ jobs:
       # $GITHUB_WORKSPACE/.github/workflows/.test-env  Used by actions/cache
       - name: Set up
         run: |
-          if [ -e .github/workflows/.test-env ]; then
-            source .github/workflows/.test-env
-            echo "DEPENDENCIES=${DEPENDENCIES}" >> $GITHUB_ENV
-          fi
-
+          # Export the target version of MediaWiki
           # An example of GITHUB_REF: refs/heads/feature-branch-1
           BRANCH_NAME=$(echo "$GITHUB_REF" | cut -d'/' -f3 | cut -d'-' -f1)
           BASE_BRANCH_NAME=$(echo "$GITHUB_BASE_REF" | cut -d'/' -f3)
@@ -85,6 +81,11 @@ jobs:
               grep -v latest | sort -Vr | head -1)" >> $GITHUB_ENV
           elif [ "${{ matrix.stage }}" == 'coverage' ]; then
             echo "QUIBBLE_DOCKER_LATEST_TAG=${DOCKER_LATEST_TAG}" >> $GITHUB_ENV
+          fi
+
+          if [ -e .github/workflows/.test-env ]; then
+            source .github/workflows/.test-env
+            echo "DEPENDENCIES=${DEPENDENCIES}" >> $GITHUB_ENV
           fi
 
       - name: Cache docker image
