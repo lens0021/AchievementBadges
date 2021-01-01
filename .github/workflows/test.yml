@@ -52,7 +52,7 @@ jobs:
             echo "DEPENDENCIES=${DEPENDENCIES}" >> $GITHUB_ENV
           fi
 
-          # An example of $GITHUB_REF: refs/heads/feature-branch-1
+          # An example of GITHUB_REF: refs/heads/feature-branch-1
           BRANCH_NAME=$(echo "$GITHUB_REF" | cut -d'/' -f3 | cut -d'-' -f1)
           BASE_BRANCH_NAME=$(echo "$GITHUB_BASE_REF" | cut -d'/' -f3)
           if [[ "$BRANCH_NAME" =~ ^master|REL\d_\d+$ ]]; then
