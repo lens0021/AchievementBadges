@@ -58,6 +58,7 @@ jobs:
           BASE_BRANCH_NAME=$(echo "$GITHUB_BASE_REF" | cut -d'/' -f3)
           echo GITHUB_EVENT_NAME="$GITHUB_EVENT_NAME"
           echo BASE_BRANCH_NAME="$BASE_BRANCH_NAME"
+          echo GITHUB_HEAD_REF="$GITHUB_HEAD_REF"
           if [[ "$BRANCH_NAME" =~ ^master|REL\d_\d+$ ]]; then
             # branch name starts with the version (ex: master-new-feature, REL1_34-bug-fix)
             echo 1
